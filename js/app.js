@@ -1,8 +1,7 @@
-//ROZGRZEWKA
-
+//ROZGRZEWKA-------------------------------------------------------------
+console.group('Rozgrzewka');
 //zadanie 1
 const lettersInCities = (cities) => console.log(cities.map(e => e.length));
-
 
 const cities = ["Kraków", "Olsztyn", "Szczecin", "Ostrów Wielkopolski"];
 lettersInCities(cities);
@@ -15,6 +14,7 @@ const age = (dateOfBirth) => console.log(dateOfBirth.map(year => currentYear - y
 
 const years = [1995, 1856, 2014, 1987];
 age(years);
+
 
 //zadanie 3
 const calculations = numbers => {
@@ -70,15 +70,13 @@ const dataFiltering = function() {
       console.group("Nazwy użytkowników wypisane dużymi literami:");
       console.log(response.users.map(user => user.name.toUpperCase()));
       console.groupEnd();
-    }); //Console log wynik
+    });
 };
 
 dataFiltering();
+console.groupEnd();
 
-
-
-
-//ARROW FUNCTIONS, SPREAD REST etc
+//ARROW FUNCTIONS, SPREAD REST etc-------------------------------------------
 
 //zadanie 1
 const saySomething = ({
@@ -96,6 +94,11 @@ const wally = {
 
 
 //zadanie 2
+
+(function IIFE(parametr){
+  return parametr;
+})();
+
 //(parametr => parametr)();
 
 
@@ -114,7 +117,7 @@ const msgHelloCounter = (number = 6) => {
 
 //zadanie 5
 const sayHello = (...names) => {
-  for (let name of names){
+  for (let name of names) {
     console.log(`Hello: ${name}`);
   }
 };
@@ -122,30 +125,135 @@ const sayHello = (...names) => {
 
 //zadanie 6
 const getAverage = (...numbers) => {
-  let sum=0, i=0;
-  for(let number of numbers){
-    sum+=number;
+  let sum = 0,
+    i = 0;
+  for (let number of numbers) {
+    sum += number;
     i++;
   }
-  if(i===0){
+  if (i === 0) {
     return 0;
   }
-  return sum/i;
+  return sum / i;
 };
 
 
 
+//KLASY---------------------------------------------------
+console.group('Klasy');
+//zadanie 1
+console.group('Kaczka');
+
+class Kaczka {
+  constructor() {
+    this.type = 'zwykła kaczka';
+  }
+
+  sayQuak() {
+    console.log('kwa kwa');
+  }
+
+  swim() {
+    console.log('płynę...');
+  }
+
+  display() {
+    console.log(`Wygląda jak ${this.type}.`);
+  }
+}
+
+const kaczuszka = new Kaczka();
+kaczuszka.sayQuak();
+kaczuszka.swim();
+kaczuszka.display();
+
+console.groupEnd();
 
 
+//zadanie 2
+console.group('DzikaKaczka');
+
+class DzikaKaczka extends Kaczka {
+  constructor(type) {
+    super(type);
+    this.type = 'dzika';
+  }
+}
+
+const dzikaKaczuszka = new DzikaKaczka();
+dzikaKaczuszka.sayQuak();
+dzikaKaczuszka.swim();
+dzikaKaczuszka.display();
+
+console.groupEnd();
 
 
+//zadanie 3 -inny konstruktor
+console.group('KrzyzowkaKaczka');
+class KrzyzowkaKaczka extends Kaczka {
+  constructor(type = 'krzyżówka') {
+    super(type);
+    this.type = type;
+  }
+}
+
+const krzyzoKaczuszka = new KrzyzowkaKaczka();
+krzyzoKaczuszka.sayQuak();
+krzyzoKaczuszka.swim();
+krzyzoKaczuszka.display();
+
+console.groupEnd();
 
 
+//zadanie 4
+console.group('fly');
+
+//"normalna" metoda
+Kaczka.prototype.fly = function() {
+  console.log('Lecę');
+};
+
+kaczuszka.fly();
+dzikaKaczuszka.fly();
+krzyzoKaczuszka.fly();
 
 
+// --------'static' Metoda----------
+/*
+Kaczka.fly = function(){
+  console.log('Lecę');
+};
+
+Kaczka.fly();
+DzikaKaczka.fly();
+KrzyzowkaKaczka.fly();
+*/
+
+console.groupEnd();
 
 
+//zadanie 5
+console.group('GumowaKaczka');
+class GumowaKaczka extends Kaczka {
+  constructor(type){
+    super(type);
+    this.type = 'gumowa';
+  }
 
+  fly(){
+    console.log('gumowe kaczki nie potrafią latać');
+  }
 
+}
 
-/////////////////////////////
+const gumowaKaczuszka = new GumowaKaczka();
+gumowaKaczuszka.sayQuak();
+gumowaKaczuszka.swim();
+gumowaKaczuszka.display();
+gumowaKaczuszka.fly();
+// kaczuszka.fly();
+// dzikaKaczuszka.fly();
+// krzyzoKaczuszka.fly();
+
+console.groupEnd();
+console.groupEnd(); //klasy

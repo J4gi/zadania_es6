@@ -5,7 +5,9 @@ const App = function() {
 
 
 App.prototype.generateLinks = function() {
-
+  for (let website of this.websites){
+    this.links.push(`"https://${website}.com"`);
+  }
 };
 
 
